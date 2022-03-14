@@ -94,7 +94,7 @@ function Class.extend(className, extendClass)
 end
 
 -- Implemented to Global
-_G.Class = Class
+_G.class = Class
 
 setmetatable(Class, ClassMetatable)
 return Class
