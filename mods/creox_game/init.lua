@@ -1,38 +1,49 @@
-local Block = creox.world.block.block
+_G.creox.game = {}
 
-local DemoBlock = Block("demo block")
-DemoBlock:register()
-local demo_block_id = DemoBlock:id()
+creox.dofile("src/block/blocks.lua")
+creox.dofile("src/item/items.lua")
 
-minetest.register_on_generated(function (minp, maxp, seed)
-    local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
-    local area = VoxelArea:new({MinEdge = emin, MaxEdge = emax})
+creox.dofile("src/player/player_setup.lua")
 
-    --> Get Data
-    local data = {}
-    vm:get_data(data)
+minetest.register_alias("mapgen_stone", creox.game.blocks.stone:name())
+minetest.register_alias("mapgen_dirt", creox.game.blocks.dirt:name())
+minetest.register_alias("mapgen_dirt_with_grass", creox.game.blocks.grass:name())
 
-    --> Use Data
-    for z = minp.z, maxp.z do
-        for y = minp.y, maxp.y do
-            for x = minp.x, maxp.x do
-                local vi = area:index(x, y, z)
+minetest.register_biome({
+	name = "creox_game:demo",
+	node_top = creox.game.blocks.grass:name(),
+	depth_top = 1,
+	node_filler = creox.game.blocks.dirt:name(),
+	depth_filler = 3,
 
-                if (y == minp.y) then
-                    data[vi] = demo_block_id
-                end
-            end
-        end
-    end
+	y_max = 31000,
+	y_min = -31000,
 
-    --> Apply & Save Data
-    vm:set_data(data)
-    minetest.generate_decorations(vm)
-    minetest.generate_ores(vm)
-    vm:update_liquids()
-    vm:calc_lighting()
-    vm:write_to_map(true)
-    minetest.after(0, function ()
-        minetest.fix_light(minp, maxp)
-    end)
-end)
+	heat_point = 0,
+	humidity_point = 0,
+
+	vertical_blend = 4,
+})
+
+local OreGenerator = creox.world.OreGenerator
+
+minetest.register_ore(OreGenerator.builder()
+.noise(OreGenerator.noise_parameter_builder()
+	.offset(0)
+	.scale(32)
+	.spread(16, 16, 16)
+	.seed(75683)
+	.octaves(4)
+	.persistence(0.0)
+	.lacunarity(2.0)
+	.types("eased")
+	.build())
+.ore("coal_ore")
+.ore_type("vein")
+.cluster_size(64)
+.chance(1)
+.height(-31000, 31000)
+.target("stone")
+.max_ore_size(4)
+.noise_threshold(0.8)
+.build())
