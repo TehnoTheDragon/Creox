@@ -60,4 +60,5 @@ creox.dofile("src/math/vector3.lua")
 -- src/gui/...
 creox.gui = {}
 creox.dofile("src/gui/formspec.lua")
+creox.dofile("src/gui/hud_group.lua")
 creox.dofile("src/gui/hud_object.lua")
