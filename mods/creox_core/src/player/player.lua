@@ -2,7 +2,7 @@ _IsInited = false
 
 local Player = class.extend("Player")
 local Players = {}
-creox.player.player = Player
+creox.player.Player = Player
 
 function Player.get_by_username(username)
     local player = Players[username]
@@ -63,6 +63,10 @@ end
 
 function Player:set_inventory_gui(gui)
     self.instance:set_inventory_formspec(gui)
+end
+
+function Player:set_physics_override(options)
+    self.instance:set_physics_override(options)
 end
 
 if not _IsInited then
