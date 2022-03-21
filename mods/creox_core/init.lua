@@ -27,7 +27,7 @@ creox.dofile("vendors/class/class.lua")
 creox.debug = {}
 creox.dofile("src/debug/logger.lua")
 
-creox.logger = creox.debug.logger()
+creox.logger = creox.debug.Logger()
 
 -- src/util/...
 creox.util = {}
@@ -41,6 +41,23 @@ creox.dofile("src/world/ore_generator.lua")
 creox.world.block = {}
 creox.dofile("src/world/block/block.lua")
 
+-- src/item/...
+creox.item = {}
+creox.dofile("src/item/item.lua")
+
 -- src/world/player/...
 creox.player = {}
 creox.dofile("src/player/player.lua")
+
+-- src/backend/...
+creox.backend = {}
+creox.dofile("src/backend/mod_storage.lua")
+creox.dofile("src/backend/datastore.lua")
+
+-- src/math/...
+creox.dofile("src/math/vector3.lua")
+
+-- src/gui/...
+creox.gui = {}
+creox.dofile("src/gui/formspec.lua")
+creox.dofile("src/gui/hud_object.lua")
