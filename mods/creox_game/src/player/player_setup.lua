@@ -1,9 +1,6 @@
 local Player = creox.player.Player
-local HudGroup = creox.gui.HudGroup
-local HudObject = creox.gui.HudObject
 
 local nodes_over = {}
-local guis = {}
 
 local function setup_node_helper(player)
     nodes_over[player:username()] = player:add_hud({
@@ -16,12 +13,6 @@ local function setup_node_helper(player)
         alignment = {x = 1, y = -1},
         z_index = 100,
     })
-
-    local hudGroup = HudGroup(player)
-    hudGroup:add("test", 
-        hudGroup:create_object("text"):uset()
-    )
-    guis[player:username()] = hudGroup
 end
 
 minetest.register_on_joinplayer(function(playerInstance, last_login)
@@ -72,7 +63,6 @@ end)
 
 minetest.register_on_leaveplayer(function(playerInstance, timed_out)
     nodes_over[playerInstance:get_player_name()] = nil
-    guis[playerInstance:get_by_username()] = nil
 end)
 
 creox.dofile("src/player/hotbar_gui.lua")
