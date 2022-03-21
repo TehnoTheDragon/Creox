@@ -1,5 +1,5 @@
 local File = class.extend("File")
-creox.util.file = File
+creox.util.File = File
 
 function File:init(filepath)
     self.filepath = filepath
