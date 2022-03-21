@@ -1,5 +1,5 @@
 local OreGenerator = {}
-creox.world.ore_generator = OreGenerator
+creox.world.OreGenerator = OreGenerator
 
 ---wrapper of `minetest.register_ore(ore_definition)`
 ---@param params string ore definition
@@ -73,7 +73,7 @@ function OreGenerator.noise_parameter_builder()
     ---Type of noise
     ---@param value string (defaults, eased, noeased, absvalue)
     function builder.types(value)
-        params.lacunarity = value
+        params.flags = value
         return builder
     end
 
