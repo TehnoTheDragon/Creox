@@ -1,10 +1,16 @@
 local Block = class.extend("Block")
-creox.world.block.block = Block
+creox.world.block.Block = Block
 
 function Block:init(registry_name)
     self._registry_name = ("%s:%s"):format(creox.mod_name(), registry_name:lower():gsub(" ", "_"))
     self._texture = {"NaN.png"}
+    
     self._events = {}
+    self._properties = {}
+end
+
+function Block:set_property(key, value)
+    self._properties[key] = value
 end
 
 function Block:set_texture(tile_textures)
@@ -39,9 +45,19 @@ function Block:on_event(event_name, callback)
 end
 
 function Block:register()
-    self.node = minetest.register_node(self._registry_name, {
+    local definition = {
         description = self._registry_name,
         tiles = self._texture,
-    })
+    }
+
+    for key, value in pairs(self._properties) do
+        definition[key] = value
+    end
+
+    for key, value in pairs(self._events) do
+        definition[key] = value
+    end
+
+    self.node = minetest.register_node(self._registry_name, definition)
     self.identifier = minetest.get_content_id(self._registry_name)
 end
