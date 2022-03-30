@@ -54,7 +54,7 @@ end
 function Formspec:get()
     local gui = elements_parser(self._formspec)
 
-    minetest.log(gui)
+    --minetest.log(gui)
     return gui
 end
 
