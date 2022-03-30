@@ -1,12 +1,29 @@
 local EnergyStorage = class.extend("EnergyStorage")
 creox.energy.EnergyStorage = EnergyStorage
 
+function EnergyStorage.from_meta(meta)
+    local energyStorage = EnergyStorage()
+    for index, value in ipairs(meta) do
+        energyStorage[index] = value
+    end
+    return energyStorage
+end
+
 function EnergyStorage:init(maxCapacity, maxInput, maxOutput, energy)
     self._max_capacity = (maxCapacity or 0)
     self._max_input = (maxInput or 0)
     self._max_output = (maxOutput or 0)
 
     self._energy = (energy or 0)
+end
+
+function EnergyStorage:to_meta()
+    return {
+        _max_capacity = self._max_capacity,
+        _max_input = self._max_input,
+        _max_output = self._max_output,
+        _energy = self._energy
+    }
 end
 
 function EnergyStorage:fix()
