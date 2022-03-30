@@ -36,10 +36,12 @@ creox.dofile("src/util/file.lua")
 -- src/world/...
 creox.world = {}
 creox.dofile("src/world/ore_generator.lua")
+creox.dofile("src/world/schematic.lua")
 
 -- src/world/block/...
 creox.world.block = {}
 creox.dofile("src/world/block/block.lua")
+creox.dofile("src/world/block/block_entity.lua")
 
 -- src/item/...
 creox.item = {}
@@ -60,5 +62,3 @@ creox.dofile("src/math/vector3.lua")
 -- src/gui/...
 creox.gui = {}
 creox.dofile("src/gui/formspec.lua")
-creox.dofile("src/gui/hud_group.lua")
-creox.dofile("src/gui/hud_object.lua")
