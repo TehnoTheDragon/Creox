@@ -48,6 +48,8 @@ function Block:register()
     local definition = {
         description = self._registry_name,
         tiles = self._texture,
+
+        groups = {dig_immediate = 2}
     }
 
     for key, value in pairs(self._properties) do
