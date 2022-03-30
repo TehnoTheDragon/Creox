@@ -4,7 +4,7 @@ local Formspec = creox.gui.Formspec
 local InventoryFormspec = Formspec()
 
 local function set_slot(formspec, x, y, inventory, index)
-    formspec:image(x, y, 1, 1, "item_slot.png")
+    formspec:image(x, y, 1, 1, "item_slot.png", true)
     formspec:list("current_player", inventory, x, y, 1, 1, index)
 end
 
@@ -12,7 +12,7 @@ local function build_inventory_formspec()
     InventoryFormspec:set_canvas_size(9.5, 8.5)
     InventoryFormspec:use_real_coordinates()
     InventoryFormspec:custom("bgcolor", "#00000000")
-    InventoryFormspec:background9_texture(0, 0, 1, 1, "inventory_background.png", true)
+    InventoryFormspec:background9_texture(0, 0, 1, 1, "container_background.png", true, 6)
     InventoryFormspec:custom("listcolors", {"#00000000"}, {"#00000000"})
 
     -- hotslots
