@@ -1,9 +1,22 @@
-_G.creox.game = {}
+_G.creox.game = {
+	Builder = { Block = {}, Item = {}, Entity = {} }
+}
 
+--> Block
+
+creox.dofile("src/block/block_builders.lua")
 creox.dofile("src/block/blocks.lua")
+
+--> Item
+
+creox.dofile("src/item/item_builders.lua")
 creox.dofile("src/item/items.lua")
 
+--> Player
+
 creox.dofile("src/player/player_setup.lua")
+
+--> World Generation
 
 minetest.register_alias("mapgen_stone", creox.game.blocks.stone:name())
 minetest.register_alias("mapgen_dirt", creox.game.blocks.dirt:name())
@@ -24,6 +37,8 @@ minetest.register_biome({
 
 	vertical_blend = 4,
 })
+
+--> Ore Generation
 
 local OreGenerator = creox.world.OreGenerator
 
@@ -47,3 +62,34 @@ minetest.register_ore(OreGenerator.builder()
 .max_ore_size(4)
 .noise_threshold(0.8)
 .build())
+
+--> Test
+
+local Schematic = creox.world.Schematic
+local TestSchematic = Schematic(5, 5, 5)
+TestSchematic:fill("creox_game:gold_block", 255)
+
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = "creox_game:grass",
+	sidelen = 16,
+	fill_ratio = 0.1,
+	biomes = {"creox_game:demo"},
+	y_min = 1000,
+	y_max = -1000,
+	schematic = minetest.register_schematic(TestSchematic:get()),
+	flags = "force_placement",
+	spawn_by = "creox_game:grass",
+	num_spawn_by = 8,
+})
+
+minetest.register_decoration({
+    deco_type = "simple",
+    place_on = {"creox_game:grass"},
+    sidelen = 16,
+    fill_ratio = 0.1,
+    biomes = {"creox_game:demo"},
+    y_max = 200,
+    y_min = 0,
+    decoration = "creox_game:tall_grass",
+})
