@@ -69,6 +69,10 @@ function Player:set_physics_override(options)
     self.instance:set_physics_override(options)
 end
 
+function Player:has_privileges(privileges)
+    return minetest.check_player_privs(self.instance, privileges)
+end
+
 if not _IsInited then
     _IsInited = true
 
