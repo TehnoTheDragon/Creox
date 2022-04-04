@@ -6,7 +6,7 @@ function File:init(filepath)
     self.file = nil
 end
 
-function File:open(mode)
+--[[function File:open(mode)
     mode = mode or "r"
     self.file = io.open(self.filepath, mode)
     if self.file == nil then
@@ -27,4 +27,4 @@ function File:read()
         content = self.file:read("*all")
     end
     return content
-end
+end]]
