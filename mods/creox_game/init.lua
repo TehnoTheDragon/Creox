@@ -16,6 +16,10 @@ creox.dofile("src/item/items.lua")
 
 creox.dofile("src/player/player_setup.lua")
 
+--> Commands
+
+creox.dofile("src/commands/commands.lua")
+
 --> World Generation
 
 minetest.register_alias("mapgen_stone", creox.game.blocks.stone:name())
@@ -71,7 +75,7 @@ TestSchematic:fill("creox_game:gold_block", 255)
 
 minetest.register_decoration({
 	deco_type = "schematic",
-	place_on = "creox_game:grass",
+	place_on = {"creox_game:grass"},
 	sidelen = 16,
 	fill_ratio = 0.1,
 	biomes = {"creox_game:demo"},
@@ -79,8 +83,6 @@ minetest.register_decoration({
 	y_max = -1000,
 	schematic = minetest.register_schematic(TestSchematic:get()),
 	flags = "force_placement",
-	spawn_by = "creox_game:grass",
-	num_spawn_by = 8,
 })
 
 minetest.register_decoration({
